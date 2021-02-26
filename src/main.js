@@ -23,15 +23,19 @@ const render = () => {
     $siteList.find('li:not(.last)').remove()
     hashMap.forEach((node, index) => {
         //node.logo = removeHttps(node.url)[0].toUpperCase()
-        const $li = $(`<li><div class="site">
+        const $li = $(`
+        <li>
+            <div class="site">
                 <div class="logo">${node.logo}</div>
                 <div class="link">${removeHttps(node.url)}</div>
-                <div class="close"><svg class="icon" >
-    <use xlink:href="#icon-Close"></use>
-</svg></div>
-            
-            </div></li>`).insertBefore($lastLi)
-        $li.on('click', (e) => {
+                <div class="close">
+                <svg class="icon" >
+    <use xlink:href="#icon-Close"></use></svg>
+                </div>
+            </div>
+        </li>`).insertBefore($lastLi);
+
+        $li.on('click', () => {
             window.open(node.url)
         })
         $li.on('click', '.close', (e) => {
@@ -65,7 +69,7 @@ window.onbeforeunload = () => {
 
 $(document).on('keypress', (e) => {
     const { key } = e
-    hashMap.forEach((node, index) => {
+    hashMap.forEach((node) => {
         if (node.logo.toLowerCase() === key) {
             window.open(node.url)
         }
